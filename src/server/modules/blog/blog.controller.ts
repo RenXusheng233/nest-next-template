@@ -14,7 +14,7 @@ export class BlogController {
   @Get('/blog')
   @Render('/blog')
   @UseInterceptors(ParamsInterceptor)
-  public home() {
+  public blogList() {
     return {};
   }
 
