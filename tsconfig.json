@@ -41,7 +41,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "next.config.js"
+    "next.config.js",
+    "webpack-hmr.config.js"
   ],
   "exclude": [
     "node_modules"
