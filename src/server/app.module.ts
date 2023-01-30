@@ -1,5 +1,8 @@
 import Next from 'next';
+import { join } from 'path';
 import { Module, DynamicModule } from '@nestjs/common';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { RenderModule } from 'nest-next';
 import { NODE_ENV } from 'src/shared/constants/env';
 import { BlogModule } from './modules/blog/blog.module';
@@ -10,6 +13,19 @@ declare const module: any;
 @Module({})
 export class AppModule {
   public static initialize(): DynamicModule {
+    const graphqlModule = GraphQLModule.forRootAsync<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      imports: [BlogModule],
+      useFactory: () => ({
+        debug: NODE_ENV === 'development',
+        playground: NODE_ENV === 'development',
+        autoSchemaFile: true,
+        definitions: {
+          path: join(process.cwd(), 'src/shared/graphql/types.ts'),
+        },
+      }),
+    });
+
     /* during initialization attempt pulling cached RenderModule
             from persisted data */
     const renderModule =
@@ -28,7 +44,7 @@ export class AppModule {
 
     return {
       module: AppModule,
-      imports: [renderModule, BlogModule, HomeModule],
+      imports: [graphqlModule, renderModule, BlogModule, HomeModule],
     };
   }
 }

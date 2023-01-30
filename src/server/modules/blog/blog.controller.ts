@@ -32,6 +32,6 @@ export class BlogController {
 
   @Get(`${FETCH_BLOG_POSTS_PREFIX}/:id`)
   public getBlogPostById(@Param('id', new ParseIntPipe()) id: number) {
-    return this.appService.getBlogPost(id);
+    return this.appService.getBlogPost({ id });
   }
 }

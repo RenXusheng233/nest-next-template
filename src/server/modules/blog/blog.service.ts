@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { from, of, toArray } from 'rxjs';
+import { from, Observable, of, toArray } from 'rxjs';
+import { BlogPost, GetBlogInput } from './blog.entity';
 
 const BLOG_POSTS = [
   { title: 'Lorem Ipsum', id: 1 },
@@ -9,12 +10,12 @@ const BLOG_POSTS = [
 
 @Injectable()
 export class BlogService {
-  getBlogPosts() {
+  getBlogPosts(): Observable<BlogPost[]> {
     return from(BLOG_POSTS).pipe(toArray());
   }
 
-  getBlogPost(postId: number) {
-    const blogPost = BLOG_POSTS.find(({ id }) => id === postId);
+  getBlogPost(params: GetBlogInput): Observable<BlogPost> | NotFoundException {
+    const blogPost = BLOG_POSTS.find(({ id }) => id === params.id);
 
     if (!blogPost) {
       return new NotFoundException();
