@@ -1,7 +1,7 @@
 import { Controller, Get, Render, Param, ParseIntPipe } from '@nestjs/common';
 import { UseInterceptors } from '@nestjs/common';
 import { BlogService } from './blog.service';
-import { ParamsInterceptor } from '../../common/interceptors/params.interceptor';
+import { QueryInterceptor } from '../../common/interceptors/query.interceptor';
 import {
   FETCH_BLOG_POSTS_PREFIX,
   FETCH_BLOG_POSTS,
@@ -13,14 +13,14 @@ export class BlogController {
 
   @Get('/blog')
   @Render('/blog')
-  @UseInterceptors(ParamsInterceptor)
+  @UseInterceptors(QueryInterceptor)
   public blogList() {
     return {};
   }
 
   @Get('/blog/:id')
   @Render('/blog/[id]')
-  @UseInterceptors(ParamsInterceptor)
+  @UseInterceptors(QueryInterceptor)
   public blogPost() {
     return {};
   }

@@ -1,7 +1,7 @@
 import { Controller, Get, Render } from '@nestjs/common';
 import { UseInterceptors } from '@nestjs/common';
 import { HomeService } from './home.service';
-import { ParamsInterceptor } from '../../common/interceptors/params.interceptor';
+import { QueryInterceptor } from '../../common/interceptors/query.interceptor';
 
 @Controller()
 export class HomeController {
@@ -9,7 +9,7 @@ export class HomeController {
 
   @Get('/')
   @Render('index')
-  @UseInterceptors(ParamsInterceptor)
+  @UseInterceptors(QueryInterceptor)
   public home() {
     return {};
   }
