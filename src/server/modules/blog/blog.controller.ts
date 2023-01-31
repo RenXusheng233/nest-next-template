@@ -1,11 +1,7 @@
-import { Controller, Get, Render, Param, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Render } from '@nestjs/common';
 import { UseInterceptors } from '@nestjs/common';
 import { BlogService } from './blog.service';
 import { QueryInterceptor } from '../../common/interceptors/query.interceptor';
-import {
-  FETCH_BLOG_POSTS_PREFIX,
-  FETCH_BLOG_POSTS,
-} from 'src/shared/constants/blog-post';
 
 @Controller()
 export class BlogController {
@@ -23,15 +19,5 @@ export class BlogController {
   @UseInterceptors(QueryInterceptor)
   public blogPost() {
     return {};
-  }
-
-  @Get(FETCH_BLOG_POSTS)
-  public listBlogPosts() {
-    return this.appService.getBlogPosts();
-  }
-
-  @Get(`${FETCH_BLOG_POSTS_PREFIX}/:id`)
-  public getBlogPostById(@Param('id', new ParseIntPipe()) id: number) {
-    return this.appService.getBlogPost({ id });
   }
 }

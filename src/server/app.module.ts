@@ -15,7 +15,6 @@ export class AppModule {
   public static initialize(): DynamicModule {
     const graphqlModule = GraphQLModule.forRootAsync<ApolloDriverConfig>({
       driver: ApolloDriver,
-      imports: [BlogModule],
       useFactory: () => ({
         debug: NODE_ENV === 'development',
         playground: NODE_ENV === 'development',

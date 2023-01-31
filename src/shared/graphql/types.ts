@@ -9,11 +9,11 @@
 /* eslint-disable */
 
 export interface GetBlogInput {
-    id: number;
+    id: string;
 }
 
 export interface BlogPost {
-    id: number;
+    id: string;
     title: string;
 }
 

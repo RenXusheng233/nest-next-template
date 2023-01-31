@@ -13,6 +13,7 @@ export class QueryInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
     const request = context.switchToHttp().getRequest() as Request;
 
+    // FIXME
     /* after executing the handler add missing request query */
     return next.handle().pipe(
       map((data) => {

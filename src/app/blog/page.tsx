@@ -1,16 +1,18 @@
 import Link from 'next/link';
-import { fetch } from 'src/shared/utils/fetch';
 import { BlogPost } from 'src/shared/graphql/types';
-import { FETCH_BLOG_POSTS } from 'src/shared/constants/blog-post';
+import { request } from 'src/shared/utils/request';
+import { GET_LIST_BLOG_POSTS } from 'src/shared/graphql/queries/blog/blog';
 
 const Home = async () => {
-  const blogPosts: BlogPost[] = await fetch(FETCH_BLOG_POSTS);
+  const blogPosts: { listBlogPosts: BlogPost[] } = await request(
+    GET_LIST_BLOG_POSTS,
+  );
 
   return (
     <div>
       <Link href={'/'}>Back</Link>
       <h1>Blog Home</h1>
-      {blogPosts.map(({ title, id }) => (
+      {blogPosts?.listBlogPosts?.map(({ title, id }) => (
         <div key={id}>
           <Link href={`/blog/${id}`}>{title}</Link>
         </div>

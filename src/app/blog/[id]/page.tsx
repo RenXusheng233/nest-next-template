@@ -1,15 +1,20 @@
 import Link from 'next/link';
-import { fetch } from 'src/shared/utils/fetch';
 import { BlogPost } from 'src/shared/graphql/types';
-import { FETCH_BLOG_POST_BY_ID } from 'src/shared/constants/blog-post';
+import { request } from 'src/shared/utils/request';
+import { GET_BLOG_POST_BY_ID } from 'src/shared/graphql/queries/blog/blog';
 
 const Blog = async ({ params }: { params: { id: string } }) => {
-  const post: BlogPost = await fetch(FETCH_BLOG_POST_BY_ID(params.id));
+  const post: { getBlogPostById: BlogPost } = await request(
+    GET_BLOG_POST_BY_ID,
+    {
+      input: { id: params.id },
+    },
+  );
 
   return (
     <div>
       <Link href={'/blog'}>Home</Link>
-      <h1>Blog {post.title}</h1>
+      <h1>Blog {post?.getBlogPostById?.title}</h1>
     </div>
   );
 };
