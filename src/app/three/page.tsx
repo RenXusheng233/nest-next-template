@@ -6,6 +6,7 @@ import {
   BoxGeometry,
   MeshBasicMaterial,
   Mesh,
+  AxesHelper,
 } from 'three';
 import { useEffect, useRef } from 'react';
 
@@ -21,26 +22,38 @@ const Three = () => {
       0.1,
       1000,
     );
-    camera.position.z = 2;
 
-    const renderer = new WebGLRenderer();
-    renderer.setSize(window.innerWidth / 2, window.innerHeight / 2, false);
-    ref.current.appendChild(renderer.domElement);
-
-    const geometry = new BoxGeometry(1, 0.8, 0.6);
-    const material = new MeshBasicMaterial({ color: 0x00ff00 });
+    const geometry = new BoxGeometry(100, 100, 100);
+    const material = new MeshBasicMaterial({
+      color: 0x00ffff,
+      transparent: true,
+      opacity: 0.5,
+    });
     const cube = new Mesh(geometry, material);
 
+    cube.position.set(0, 0, 0);
     scene.add(cube);
 
-    const animate = function () {
-      requestAnimationFrame(animate);
-      cube.rotation.x += 0.01;
-      cube.rotation.y += 0.01;
-      renderer.render(scene, camera);
-    };
+    camera.position.set(200, 200, 200);
+    camera.lookAt(cube.position);
 
-    animate();
+    const axesHelper = new AxesHelper(200);
+    scene.add(axesHelper);
+
+    const renderer = new WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight, false);
+    ref.current.appendChild(renderer.domElement);
+
+    renderer.render(scene, camera);
+
+    // const animate = function () {
+    //   requestAnimationFrame(animate);
+    //   cube.rotation.x += 0.01;
+    //   cube.rotation.y += 0.01;
+    //   renderer.render(scene, camera);
+    // };
+
+    // animate();
   };
 
   useEffect(() => {
