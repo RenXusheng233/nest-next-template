@@ -7,6 +7,7 @@ import { RenderModule } from 'nest-next';
 import { NODE_ENV } from 'src/shared/constants/env';
 import { BlogModule } from './modules/blog/blog.module';
 import { HomeModule } from './modules/home/home.module';
+import { ThreeModule } from './modules/three/three.module';
 
 declare const module: any;
 
@@ -43,7 +44,13 @@ export class AppModule {
 
     return {
       module: AppModule,
-      imports: [graphqlModule, renderModule, BlogModule, HomeModule],
+      imports: [
+        graphqlModule,
+        renderModule,
+        BlogModule,
+        HomeModule,
+        ThreeModule,
+      ],
     };
   }
 }
