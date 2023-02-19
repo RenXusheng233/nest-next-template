@@ -3,11 +3,10 @@ import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import Stats from 'three/examples/jsm/libs/stats.module';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { GUI } from 'dat.gui';
 const Three = () => {
   const ref = useRef<HTMLDivElement>();
 
-  const createExample = () => {
+  const createExample = async () => {
     const scene = new THREE.Scene();
 
     const renderer = new THREE.WebGLRenderer({
@@ -15,7 +14,7 @@ const Three = () => {
     });
     renderer.setClearColor('#20262E', 1);
     renderer.setSize(window.innerWidth, window.innerHeight, false);
-    // renderer.setPixelRatio(window.devicePixelRatio); FIXME ???
+    // renderer.setPixelRatio(window.devicePixelRatio); // FIXME
     ref.current.appendChild(renderer.domElement);
 
     const geometry = new THREE.BoxGeometry(100, 100, 100);
@@ -65,11 +64,12 @@ const Three = () => {
     stats.setMode(0); // default
     ref.current.appendChild(stats.domElement);
 
-    const gui = new GUI();
+    const dat = await import('dat.gui');
+    const gui = new dat.GUI();
     const guiParams = {
       material: '#8EA7E9',
       specular: '#F5F5F5',
-      isRotate: true,
+      isRotate: false,
     };
     const cubeFolder = gui.addFolder('Cube');
     cubeFolder.add(cube.position, 'x', 0, 200).name('positionX');
