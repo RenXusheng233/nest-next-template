@@ -30,6 +30,7 @@
     "@nestjs/core": "^9.0.0",
     "@nestjs/graphql": "^10.1.7",
     "@nestjs/platform-express": "^9.0.0",
+    "@react-three/fiber": "^8.11.5",
     "apollo-server-express": "^3.11.1",
     "graphql": "^16.6.0",
     "graphql-request": "^5.1.0",
