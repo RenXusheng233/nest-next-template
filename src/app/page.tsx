@@ -5,6 +5,9 @@ const Home = async () => {
     <div>
       <h1>Welcome</h1>
       <Link href={`/blog`}>Go to Blog</Link>
+      <br />
+      <br />
+      <Link href={`/three`}>Go to Three</Link>
     </div>
   );
 };

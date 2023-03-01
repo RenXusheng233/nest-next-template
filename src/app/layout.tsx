@@ -1,3 +1,5 @@
+import 'src/shared/style/global.css';
+
 export default function RootLayout({
   children,
 }: {
