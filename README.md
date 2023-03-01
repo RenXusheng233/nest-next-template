@@ -21,4 +21,4 @@ $ yarn run start:dev
 $ yarn run start:prod
 ```
 
-**El Psy Kongroo!!**
+**El Psy Kongroo!!!**
