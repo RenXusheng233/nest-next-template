@@ -9,11 +9,19 @@ export class BlogResolver {
 
   @Query(() => [BlogPost])
   listBlogPosts(): Observable<BlogPost[]> {
-    return this.blogService.getBlogPosts();
+    try {
+      return this.blogService.getBlogPosts();
+    } catch (error) {
+      throw error;
+    }
   }
 
   @Query(() => BlogPost)
   getBlogPostById(@Args('input') input: GetBlogInput) {
-    return this.blogService.getBlogPost(input);
+    try {
+      return this.blogService.getBlogPost(input);
+    } catch (error) {
+      throw error;
+    }
   }
 }
